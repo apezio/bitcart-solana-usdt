@@ -160,4 +160,6 @@ Bump the tag in `daemon/Dockerfile` (`FROM`), `components/solana.yml` (`image`) 
 
 ## License
 
-MIT. See `LICENSE`. Bitcart is MIT licensed, Copyright (c) 2019 MrNaif2018.
+MIT. See `LICENSE`.
+
+This plugin runs on top of the daemon base classes and SDK of [Bitcart](https://github.com/bitcart/bitcart). Bitcart is MIT licensed, Copyright (c) 2019 MrNaif2018.
