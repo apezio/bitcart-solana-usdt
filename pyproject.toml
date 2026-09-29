@@ -1,0 +1,23 @@
+[project]
+name = "bitcart-solana-usdt"
+version = "0.1.0"
+description = "USDT on Solana for Bitcart 0.10.3.0 (docker plugin)"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 127
+preview = true
+
+[tool.ruff.lint]
+select = ["F", "E", "I", "UP", "YTT", "B", "T10", "C", "SIM", "RUF100", "RET", "A", "S", "ASYNC", "TID", "PLC0415", "T201"]
+ignore = ["RET502", "RET503", "S104", "S507", "ASYNC110", "ASYNC240", "A005", "PLC0415"]
+mccabe = { max-complexity = 12 }
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S"]
+"backend_tests/*" = ["S"]

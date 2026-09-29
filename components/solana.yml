@@ -1,0 +1,34 @@
+services:
+  solana:
+    restart: unless-stopped
+    image: forked/bitcart-sol:0.10.3.0
+    # the image only exists locally: build it from ./daemon, never try to pull it (./update.sh runs compose pull)
+    pull_policy: build
+    build:
+      context: ./plugins/docker/solana/daemon
+    environment:
+      SOL_NETWORK: ${SOL_NETWORK:-mainnet}
+      SOL_SERVER: ${SOL_SERVER:-https://api.mainnet-beta.solana.com}
+      SOL_MAX_SYNC_HOURS: ${SOL_MAX_SYNC_HOURS:-24}
+      SOL_DEBUG: ${SOL_DEBUG:-false}
+    expose:
+      - "5012"
+    volumes:
+      - "solana_datadir:/data"
+
+  backend:
+    environment:
+      SOL_HOST: solana
+      SOL_NETWORK: ${SOL_NETWORK:-mainnet}
+    depends_on:
+      - solana
+    links:
+      - solana
+
+  worker:
+    environment:
+      SOL_HOST: solana
+      SOL_NETWORK: ${SOL_NETWORK:-mainnet}
+
+volumes:
+  solana_datadir:
